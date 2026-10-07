@@ -38,6 +38,15 @@ Create a room to host, or enter a room code to join a match from another device.
 
 ![Whisker Wars gameplay showing the shared map, standings, and trivia challenge](docs/images/whisker-wars-gameplay.png)
 
+## 🛠️ Tech Stack
+
+- **Frontend:** HTML, CSS, JavaScript
+- **Backend:** Netlify Functions
+- **Storage:** Netlify Blobs
+- **Build:** esbuild
+- **Testing:** Node.js Test Runner
+- **Deployment:** Netlify
+
 ## 🏗️ Architecture
 
 The frontend lives in `web/`. Multiplayer state is handled by the Netlify Function in `netlify/functions/game.ts` and the shared game logic in `netlify/lib/game.js`. Room state is persisted with Netlify Blobs using strong consistency and conditional writes.
