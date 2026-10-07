@@ -4,6 +4,8 @@
 
 Whisker Wars is a real-time multiplayer trivia territory battle for 2–8 players. Players create or join a room with a short code, answer trivia questions, and capture or steal territories on a shared map.
 
+![Whisker Wars overview: trivia, live standings, and a shared territory map](docs/images/whisker-wars-overview.png)
+
 ## ✨ Features
 
 - 2–8 player multiplayer rooms
@@ -18,6 +20,12 @@ Whisker Wars is a real-time multiplayer trivia territory battle for 2–8 player
 - Responsive phone and desktop UI
 - Three-round matches with a final winner
 
+## 🏠 Room Lobby
+
+Create a room to host, or enter a room code to join a match from another device.
+
+![Whisker Wars lobby showing the create-room and join-room options](docs/images/whisker-wars-lobby.png)
+
 ## 🕹️ How to Play
 
 1. Open the live game.
@@ -27,6 +35,8 @@ Whisker Wars is a real-time multiplayer trivia territory battle for 2–8 player
 5. On your turn, answer the trivia question and select a neutral or rival territory.
 6. A correct answer captures the selected territory; rival territory can be stolen.
 7. After three rounds, the player with the most territories wins.
+
+![Whisker Wars gameplay showing the shared map, standings, and trivia challenge](docs/images/whisker-wars-gameplay.png)
 
 ## 🏗️ Architecture
 
@@ -69,8 +79,10 @@ netlify/functions/      # Netlify serverless entry point
 netlify/lib/            # Multiplayer game logic
 scripts/                # Build scripts
 test/                   # Game integration tests
+docs/images/            # README screenshots
 netlify.toml            # Netlify deployment configuration
 package.json            # Project scripts and dependencies
+pnpm-lock.yaml          # Dependency lockfile
 ```
 
 ## 🌟 Project Story
