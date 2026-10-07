@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#131c18">
+  <meta name="description" content="A live multiplayer trivia game of territory and tactics.">
+  <title>Claim — Trivia Territory</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar">
+      <a class="brand" href="./" aria-label="Claim home"><span class="brand-mark">C</span><span>CLAIM<span class="brand-dot">.</span></span></a>
+      <div class="top-actions"><span class="live-pill"><i></i> REAL-TIME MULTIPLAYER</span><button class="icon-button" id="rules-open" aria-label="Game rules">?</button></div>
+    </header>
+
+    <main>
+      <section class="screen active" id="home-screen">
+        <div class="hero-copy">
+          <div class="eyebrow"><span class="eyebrow-line"></span> YOUR KNOWLEDGE. YOUR TERRITORY.</div>
+          <h1>Think fast.<br><em>Take ground.</em></h1>
+          <p class="hero-sub">A little trivia. A lot of friendly conquest.<br>Gather your people and make your mark.</p>
+        </div>
+        <div class="entry-grid">
+          <article class="panel create-panel">
+            <div class="panel-index">01 / HOST A GAME</div>
+            <h2>Start a new room</h2>
+            <p>Bring the crew together. Up to eight players, one shared map.</p>
+            <label class="field-label" for="create-name">YOUR DISPLAY NAME</label>
+            <input id="create-name" maxlength="18" placeholder="e.g. Alex" autocomplete="nickname">
+            <button class="button button-primary" id="create-btn">Create room <span>↗</span></button>
+          </article>
+          <article class="panel join-panel">
+            <div class="panel-index">02 / JOIN A GAME</div>
+            <h2>Have a room code?</h2>
+            <p>Enter the code from your host and jump into the game.</p>
+            <label class="field-label" for="join-name">YOUR DISPLAY NAME</label>
+            <input id="join-name" maxlength="18" placeholder="e.g. Sam" autocomplete="nickname">
+            <div class="join-row"><input id="room-code" maxlength="5" placeholder="ROOM CODE" autocomplete="off" spellcheck="false"><button class="button button-light" id="join-btn">Join room <span>↗</span></button></div>
+          </article>
+        </div>
+        <div class="hero-foot"><span>NO ACCOUNT NEEDED</span><span>✳</span><span>2–8 PLAYERS</span><span>✳</span><span>ONE SHARED BOARD</span></div>
+      </section>
+
+      <section class="screen" id="room-screen">
+        <div class="room-heading"><div><div class="eyebrow"><span class="eyebrow-line"></span> YOUR GAME ROOM</div><h1>Room <em id="room-code-display">-----</em></h1></div><button class="button button-outline" id="leave-btn">Leave room</button></div>
+        <div class="lobby-grid">
+          <article class="panel lobby-panel">
+            <div class="panel-index">THE LINEUP <span id="player-count"></span></div>
+            <div class="player-list" id="player-list"></div>
+            <div class="lobby-footer"><span id="lobby-hint">Waiting for another player…</span><button class="button button-primary" id="start-btn">Start game <span>↗</span></button></div>
+          </article>
+          <aside class="panel invite-panel">
+            <div class="panel-index">GET THE CREW IN</div><h2>Pass it around.</h2><p>Anyone can join from their phone or laptop. Share the room code or send this link.</p>
+            <div class="invite-code"><span id="invite-code">-----</span><button id="copy-code" aria-label="Copy room code">COPY</button></div>
+            <button class="button button-light" id="copy-link">Copy invite link <span>↗</span></button>
+            <div class="no-login">NO LOGIN · JUST A NAME + CODE</div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="screen" id="game-screen">
+        <div class="game-top">
+          <div><div class="eyebrow"><span class="eyebrow-line"></span><span id="game-room-label">LIVE ROOM</span></div><div class="turn-line" id="turn-line">Waiting for game…</div></div>
+          <div class="turn-counter"><span>ROUND</span><strong id="turn-number">01</strong><i>/ 03</i></div>
+        </div>
+        <div class="game-layout">
+          <section class="map-panel">
+            <div class="map-head"><div><div class="panel-index">SHARED TERRITORY</div><h2>The board</h2></div><div class="map-legend" id="map-legend"></div></div>
+            <div class="territory-grid" id="territory-grid" aria-label="Territory map"></div>
+            <div class="map-caption"><span>24 territories</span><span id="map-progress">0 CLAIMED</span></div>
+          </section>
+          <aside class="game-aside">
+            <section class="panel score-panel"><div class="panel-index">THE STANDINGS</div><div class="score-list" id="score-list"></div></section>
+            <section class="panel question-panel" id="question-panel"><div class="panel-index">YOUR CHALLENGE <span id="question-counter">01</span></div><h2 id="question-text">The first question is on its way…</h2><div class="answers" id="answer-list"></div><div class="target-note" id="target-note">Choose a neutral or rival territory on the map.</div><button class="button button-primary" id="submit-answer" disabled>Lock in answer <span>↗</span></button><div class="action-error" id="action-error" role="status"></div></section>
+            <section class="panel result-panel hidden" id="result-panel"><div class="panel-index">GAME OVER</div><div class="winner-mark">✳</div><h2 id="winner-title">The winner is…</h2><div id="final-scores" class="final-scores"></div><button class="button button-outline" id="new-room">Play another round</button></section>
+          </aside>
+        </div>
+        <div class="activity" id="activity" aria-live="polite"></div>
+      </section>
+    </main>
+
+    <footer><span>CLAIM © 2026</span><span>BUILT FOR GOOD-NATURED RIVALRY</span><span>SHARED STATE · LIVE MAP</span></footer>
+  </div>
+  <div class="toast" id="toast" role="status"></div>
+  <dialog id="rules-dialog"><button class="dialog-close" id="rules-close" aria-label="Close rules">×</button><div class="eyebrow"><span class="eyebrow-line"></span> QUICK FIELD GUIDE</div><h2>How to play</h2><ol><li><b>Get your group in.</b> One person creates a room, then shares the five-character code. Play with 2–8 people.</li><li><b>Take your turn.</b> Answer the trivia question and choose a neutral or rival territory.</li><li><b>Claim the ground.</b> Correct answers capture that territory, even if an opponent owns it. Misses still pass the turn.</li><li><b>Win the map.</b> Play three rounds. Most territories wins; ties go to the first name alphabetically.</li></ol><p class="rules-note">No login needed. Your room, turn, map and score are shared live across every device.</p></dialog>
+  <script type="module" src="./app.js"></script>
+</body>
+</html>
